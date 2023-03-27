@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { setApiStatus } from 'src/app/shared/app.action';
 import { selectAppState } from 'src/app/shared/app.selector';
 import { Appstate } from 'src/app/shared/appstate';
-import { Notes } from '../store/notes';
 import { addNewNote } from '../store/notes.action';
 
 @Component({
@@ -16,17 +20,27 @@ export class AddComponent {
   constructor(
     private store: Store,
     private router: Router,
-    private appStore: Store<Appstate>
+    private appStore: Store<Appstate>,
+
   ) {}
 
-  noteForm: Notes = {
-    id: 0,
-    title: '',
-    note: '',
-  };
-  
+  noteForm: FormGroup;
+
+  ngOnInit(): void {
+    this.noteForm = new FormGroup({
+      noteInformation: new FormControl('', [Validators.required]),
+      scale: new FormControl(0, [Validators.min(0), Validators.max(5)]),
+    });
+  }
+
   saveNewNote() {
-    this.store.dispatch(addNewNote({ payload: { ...this.noteForm } }));
+    const newNotes = {
+      id: 0,
+      noteInformation: this.noteForm.value.noteInformation,
+      scale: this.noteForm.value.scale,
+    };
+
+    this.store.dispatch(addNewNote({ payload: newNotes }));
     let appState$ = this.appStore.pipe(select(selectAppState));
     appState$.subscribe((data) => {
       if (data.apiStatus === 'success') {

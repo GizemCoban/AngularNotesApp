@@ -2,13 +2,28 @@
   "notes": [
     {
       "id": 1,
-      "title": "Notlarım22",
-      "note": "Franz Kafka"
+      "noteInformation": "Notlarım22",
+      "scale": "2"
     },
     {
       "id": 2,
-      "title": "Notlarım",
-      "note": "gdfgddjjj"
+      "noteInformation": "Notlar",
+      "scale": "4"
+    },
+    {
+      "id": 3,
+      "noteInformation": "fff",
+      "scale": "4"
+    },
+    {
+      "id": 4,
+      "noteInformation": "ddd",
+      "scale": "4"
+    },
+    {
+      "id": 5,
+      "noteInformation": "Notlar",
+      "scale": "3"
     }
   ]
 }

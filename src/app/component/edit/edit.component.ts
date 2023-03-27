@@ -24,8 +24,8 @@ export class EditComponent implements OnInit {
 
   noteForm: Notes = {
     id: 0,
-    title: '',
-    note: '',
+    noteInformation: '',
+    scale: 0,
   };
 
   ngOnInit(): void {

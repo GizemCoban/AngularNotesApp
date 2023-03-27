@@ -1,20 +1,20 @@
 <div class="container">
   <legend>Update Note</legend>
   <div class="mb-3">
-    <label for="txtNoteName" class="form-label">Note Title</label>
+    <label for="txtNoteName" class="form-label">Note Information</label>
     <input
       type="text"
-      [(ngModel)]="noteForm.title"
+      [(ngModel)]="noteForm.noteInformation"
       class="form-control"
       id="txtNoteName"
     />
   </div>
   <div class="mb-3">
-    <label for="txtDescription" class="form-label">Note Description</label>
+    <label for="txtDescription" class="form-label">Scale</label>
     <input
       type="text"
       class="form-control"
-      [(ngModel)]="noteForm.note"
+      [(ngModel)]="noteForm.scale"
       id="txtDescription"
     />
   </div>
