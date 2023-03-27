@@ -6,10 +6,12 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
 import { setApiStatus } from 'src/app/shared/app.action';
 import { selectAppState } from 'src/app/shared/app.selector';
 import { Appstate } from 'src/app/shared/appstate';
 import { addNewNote } from '../store/notes.action';
+
 
 @Component({
   selector: 'app-add',
@@ -21,6 +23,7 @@ export class AddComponent {
     private store: Store,
     private router: Router,
     private appStore: Store<Appstate>,
+    private toastr: ToastrService
 
   ) {}
 
@@ -34,6 +37,9 @@ export class AddComponent {
   }
 
   saveNewNote() {
+    if(this.noteForm.status ==="INVALID") {
+      return alert("Formu Kontrol Ediniz")
+    }
     const newNotes = {
       id: 0,
       noteInformation: this.noteForm.value.noteInformation,
@@ -44,6 +50,7 @@ export class AddComponent {
     let appState$ = this.appStore.pipe(select(selectAppState));
     appState$.subscribe((data) => {
       if (data.apiStatus === 'success') {
+        this.toastr.success('', 'Note added');
         this.appStore.dispatch(
           setApiStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
         );

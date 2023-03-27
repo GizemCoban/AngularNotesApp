@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
+import { ToastrService } from 'ngx-toastr';
 import { switchMap } from 'rxjs';
 import { setApiStatus } from 'src/app/shared/app.action';
 import { selectAppState } from 'src/app/shared/app.selector';
 import { Appstate } from 'src/app/shared/appstate';
-import { Notes } from '../store/notes';
 import { updateNote } from '../store/notes.action';
 import { selectNoteById } from '../store/notes.selector';
 
@@ -15,29 +16,34 @@ import { selectNoteById } from '../store/notes.selector';
   styleUrls: ['./edit.component.css'],
 })
 export class EditComponent implements OnInit {
+  noteForm: FormGroup;
+  id: number;
   constructor(
     private store: Store,
     private route: ActivatedRoute,
     private router: Router,
-    private appStore: Store<Appstate>
+    private appStore: Store<Appstate>,
+    private toastr: ToastrService
   ) {}
-
-  noteForm: Notes = {
-    id: 0,
-    noteInformation: '',
-    scale: 0,
-  };
 
   ngOnInit(): void {
     let fetchData$ = this.route.paramMap.pipe(
       switchMap((params) => {
-        var id = Number(params.get('id'));
-        return this.store.pipe(select(selectNoteById(id)));
+        this.id = Number(params.get('id'));
+        return this.store.pipe(select(selectNoteById(this.id)));
       })
     );
     fetchData$.subscribe((data) => {
       if (data) {
-        this.noteForm = { ...data };
+        this.noteForm = new FormGroup({
+          noteInformation: new FormControl(data.noteInformation, [
+            Validators.required,
+          ]),
+          scale: new FormControl(data.scale, [
+            Validators.min(0),
+            Validators.max(5),
+          ]),
+        });
       } else {
         this.router.navigate(['/']);
       }
@@ -45,10 +51,17 @@ export class EditComponent implements OnInit {
   }
 
   updateNote() {
-    this.store.dispatch(updateNote({ payload: { ...this.noteForm } }));
+    const newNotes = {
+      id: this.id,
+      noteInformation: this.noteForm.value.noteInformation,
+      scale: this.noteForm.value.scale,
+    };
+
+    this.store.dispatch(updateNote({ payload: newNotes }));
     let apiStatus$ = this.appStore.pipe(select(selectAppState));
     apiStatus$.subscribe((apState) => {
       if (apState.apiStatus == 'success') {
+        this.toastr.success('', 'Note updated.');
         this.appStore.dispatch(
           setApiStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
         );

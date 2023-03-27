@@ -8,7 +8,7 @@
     {
       "id": 2,
       "noteInformation": "Notlar",
-      "scale": "4"
+      "scale": "1"
     },
     {
       "id": 3,
@@ -22,8 +22,13 @@
     },
     {
       "id": 5,
-      "noteInformation": "Notlar",
+      "noteInformation": "Notlar11",
       "scale": "3"
+    },
+    {
+      "id": 6,
+      "noteInformation": "fffg",
+      "scale": 0
     }
   ]
 }

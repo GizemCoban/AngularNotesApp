@@ -11,6 +11,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
 import { appReducer } from './shared/app.reducer';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, HeaderComponent],
@@ -22,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     StoreModule.forRoot({ myappstate: appReducer }),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
