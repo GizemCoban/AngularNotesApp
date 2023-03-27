@@ -22,4 +22,8 @@ export class NotesService {
       payload
     );
   }
+
+  deleteNote (id: number) {
+    return this.http.delete(`http://localhost:3000/notes/${id}`)
+  }
 }

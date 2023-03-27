@@ -27,3 +27,13 @@ export const updateNoteResponse = createAction(
   '[Note Api]  UpdateNoteResponse',
   props<{ updateNote: Notes }>()
 );
+
+export const deleteNote = createAction(
+  '[Note Api] DeleteNote',
+  props<{ id: number }>()
+);
+
+export const deleteNoteSuccess = createAction(
+  '[Note Api] DeleteNoteSuccess',
+  props<{ id: number }>()
+);

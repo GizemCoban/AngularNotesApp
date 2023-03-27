@@ -17,7 +17,7 @@ export class NotesEffect {
 
   loadAllNote$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(NoteAction.getNotesApi, NoteAction.addNewNoteResponse),
+      ofType(NoteAction.getNotesApi, NoteAction.addNewNoteResponse, NoteAction.deleteNoteSuccess),
       switchMap((action) =>
         this.service
           .get()
@@ -63,6 +63,28 @@ export class NotesEffect {
               })
             );
             return NoteAction.updateNoteResponse({ updateNote: data });
+          })
+        );
+      })
+    );
+  });
+
+
+  deleteNoteAPI$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(NoteAction.deleteNote),
+      switchMap((action) => {
+        this.appStore.dispatch(
+          setApiStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
+        );
+        return this.service.deleteNote(action.id).pipe(
+          map((data) => {
+            this.appStore.dispatch(
+              setApiStatus({
+                apiStatus: { apiResponseMessage: '', apiStatus: 'success' },
+              })
+            );
+            return NoteAction.deleteNoteSuccess({ id: action.id });
           })
         );
       })
