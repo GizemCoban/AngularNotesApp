@@ -1,5 +1,5 @@
 <div class="container mt-2" *ngIf="notes$ | async; else isNotNotes">
-  <div class="row row-cols-1 row-cols-md-3 g-4" >
+  <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col" *ngFor="let note of notes$ | async">
       <div class="card">
         <div class="card-body">
@@ -11,6 +11,7 @@
         <div class="card-body">
           <button class="btn text-white" style="background-color: #6d12f5">
             <a
+            [routerLink]="['/edit', note.id]"
               class="text-white"
               style="background-color: #6d12f5; text-decoration: none"
               >Edit Note</a

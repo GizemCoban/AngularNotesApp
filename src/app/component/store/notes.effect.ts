@@ -46,4 +46,26 @@ export class NotesEffect {
       })
     )
   );
+
+
+  updateNoteAPI$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(NoteAction.updateNote),
+      switchMap((action) => {
+        this.appStore.dispatch(
+          setApiStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
+        );
+        return this.service.updateNote(action.payload).pipe(
+          map((data) => {
+            this.appStore.dispatch(
+              setApiStatus({
+                apiStatus: { apiResponseMessage: '', apiStatus: 'success' },
+              })
+            );
+            return NoteAction.updateNoteResponse({ updateNote: data });
+          })
+        );
+      })
+    );
+  });
 }

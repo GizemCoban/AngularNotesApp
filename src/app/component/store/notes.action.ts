@@ -17,3 +17,13 @@ export const addNewNoteResponse = createAction(
   '[Note Api] AddNewNoteResponse',
   props<{ response: Notes }>()
 );
+
+export const updateNote = createAction(
+  '[Note Api]  UpdateNote',
+  props<{ payload: Notes }>()
+);
+
+export const updateNoteResponse = createAction(
+  '[Note Api]  UpdateNoteResponse',
+  props<{ updateNote: Notes }>()
+);

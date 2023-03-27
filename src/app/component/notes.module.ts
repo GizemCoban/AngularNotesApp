@@ -9,9 +9,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { NotesEffect } from './store/notes.effect';
 import { noteReducer } from './store/notes.reducer';
 import { AddComponent } from './add/add.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
-  declarations: [HomeComponent, AddComponent],
+  declarations: [HomeComponent, AddComponent, EditComponent],
   imports: [
     CommonModule,
     NotesRoutingModule,

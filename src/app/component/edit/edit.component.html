@@ -1,0 +1,19 @@
+<div class="container">
+  <legend>Update Note</legend>
+  <div class="mb-3">
+    <label for="txtNoteName" class="form-label">Note Title</label>
+    <input type="text"  [(ngModel)] ="noteForm.title" class="form-control" id="txtNoteName" />
+  </div>
+  <div class="mb-3">
+    <label for="txtDescription" class="form-label">Note Description</label>
+    <input type="text" class="form-control" [(ngModel)]="noteForm.note" id="txtDescription" />
+  </div>
+  <button
+    type="button"
+    class="btn text-white"
+    style="background-color: #6d12f5"
+    (click)="updateNote()"
+  >
+    Update
+  </button>
+</div>

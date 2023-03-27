@@ -5,16 +5,15 @@ import { Notes } from '../store/notes';
 import { getNotesApi } from '../store/notes.action';
 import { getNoteList } from '../store/notes.selector';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   notes$!: Observable<Notes[]>;
-  
-  constructor(private store: Store,) {}
+
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
     this.notes$ = this.store.pipe(select(getNoteList));

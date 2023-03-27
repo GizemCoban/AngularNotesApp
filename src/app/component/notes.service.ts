@@ -15,4 +15,11 @@ export class NotesService {
   addNewNote(payload: Notes) {
     return this.http.post<Notes>('http://localhost:3000/notes', payload);
   }
+
+  updateNote(payload: Notes) {
+    return this.http.put<Notes>(
+      `http://localhost:3000/notes/${payload.id}`,
+      payload
+    );
+  }
 }
