@@ -1,4 +1,10 @@
-import { createFeatureSelector } from '@ngrx/store';
-import { Notes } from './notes';
- 
-export const selectNotes = createFeatureSelector<Notes[]>('mynotes');
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { State } from './notes.reducer';
+
+
+export const selectNotes = createFeatureSelector<State>('mynotes');
+
+export const getNoteList = createSelector(
+  selectNotes,
+  (state) => state.noteList
+);

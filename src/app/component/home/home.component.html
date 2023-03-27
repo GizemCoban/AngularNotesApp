@@ -1,1 +1,34 @@
-<p>home works!</p>
+<div class="container mt-2" *ngIf="notes$; else isNotNotes">
+  <div class="row row-cols-1 row-cols-md-3 g-4" >
+    <div class="col" *ngFor="let note of notes$ | async">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ note.title }}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{ note.note }}</li>
+        </ul>
+        <div class="card-body">
+          <button class="btn text-white" style="background-color: #6d12f5">
+            <a
+              class="text-white"
+              style="background-color: #6d12f5; text-decoration: none"
+              >Edit Note</a
+            >
+          </button>
+          <button class="btn text-white" style="background-color: #6d12f5">
+            <a
+              class="text-white"
+              style="background-color: #6d12f5; text-decoration: none"
+              >Delete</a
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #isNotNotes>
+  <div>Henüz içerik girilmedi</div>
+</ng-template>
