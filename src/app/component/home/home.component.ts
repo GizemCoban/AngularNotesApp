@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { map, Observable } from 'rxjs';
 import { setApiStatus } from 'src/app/shared/app.action';
 import { selectAppState } from 'src/app/shared/app.selector';
 import { Appstate } from 'src/app/shared/appstate';
@@ -20,18 +22,20 @@ export class HomeComponent implements OnInit {
   notes$!: Observable<Notes[]>;
   deleteModal: any;
   idToDelete: number = 0;
+  searchControl:string='';
 
   constructor(
     private store: Store,
     private appStore: Store<Appstate>,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
     this.deleteModal = new window.bootstrap.Modal(
       document.getElementById('deleteModal')
     );
-
+   
     this.notes$ = this.store.pipe(select(getNoteList));
     this.store.dispatch(getNotesApi());
   }
@@ -51,6 +55,8 @@ export class HomeComponent implements OnInit {
     apiStatus$.subscribe((apState) => {
       if (apState.apiStatus == 'success') {
         this.deleteModal.hide();
+        
+        this.toastr.success('', 'Note Deleted');
         this.appStore.dispatch(
           setApiStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
         );

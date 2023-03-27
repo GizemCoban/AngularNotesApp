@@ -1,29 +1,42 @@
-<div class="container mt-2" *ngIf="(notes$ | async)?.length!=0; else isNotNotes">
+<div
+  class="container mt-2"
+  *ngIf="(notes$ | async)?.length != 0; else isNotNotes"
+>
+  <div class="mb-4">
+    <input type="text" class="form-control" [value]="searchControl" />
+  </div>
+
   <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col" *ngFor="let note of notes$ | async">
-      <div class="card" >
+    <div class="col" *ngFor="let note of (notes$ | async)?.slice()?.reverse()">
+      <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ note.noteInformation }}</h5>
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{ note.scale }}</li>
+          <li class="list-group-item">Scale: {{ note.scale }}</li>
         </ul>
         <div class="card-body">
-          <button class="btn text-white" style="background-color: #6d12f5">
+          <button
+            class="btn text-white input-edit"
+            style="background-color: #6d12f5; margin-right: 2px"
+          >
             <a
-            [routerLink]="['/edit', note.id]"
+              [routerLink]="['/edit', note.id]"
               class="text-white"
               style="background-color: #6d12f5; text-decoration: none"
               >Edit Note</a
             >
           </button>
-          <button class="btn text-white" style="background-color: #6d12f5"  (click)="openDeleteModal(note.id)">
+          <button
+            class="btn text-white input-edit"
+            style="background-color: #6d12f5"
+            (click)="openDeleteModal(note.id)"
+          >
             <a
               class="text-white"
               style="background-color: #6d12f5; text-decoration: none"
               >Delete</a
             >
-           
           </button>
         </div>
       </div>
@@ -32,24 +45,37 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
-      <div class="modal-body">
-        Are sure to delete this item?
-      </div>
+      <div class="modal-body">Are sure to delete this item?</div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" (click)="delete()">Confirm Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-danger" (click)="delete()">
+          Confirm Delete
+        </button>
       </div>
     </div>
   </div>
 </div>
 
 <ng-template #isNotNotes>
-  <div>No Content Found</div>
+  <div>No content has been entered yet</div>
 </ng-template>

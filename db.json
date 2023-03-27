@@ -4,6 +4,21 @@
       "id": 1,
       "noteInformation": "c",
       "scale": 0
+    },
+    {
+      "id": 2,
+      "noteInformation": "Notlar",
+      "scale": "5"
+    },
+    {
+      "id": 3,
+      "noteInformation": "Notlarım",
+      "scale": "4"
+    },
+    {
+      "id": 4,
+      "noteInformation": "Gizem",
+      "scale": "4"
     }
   ]
 }

@@ -1,0 +1,8 @@
+.input-edit {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  
+  .input-edit:hover {
+    opacity: 1;
+  }
