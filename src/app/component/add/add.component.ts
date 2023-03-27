@@ -54,7 +54,7 @@ export class AddComponent {
         this.appStore.dispatch(
           setApiStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
         );
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       }
     });
   }

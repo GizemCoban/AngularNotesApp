@@ -1,7 +1,14 @@
 <nav class="navbar navbar-light" style="background-color: #6d12f5">
   <div class="container-fluid">
     <a class="navbar-brand text-white" href="#">Note App</a>
-    <button type="button" routerLink="/add" class="btn btn-info">Note Add</button>
+
+    <div *ngIf="isNoteButton | async">
+      <button type="button" routerLink="/add" class="btn btn-info">
+        Note Add
+      </button>
+      <button type="button" (click)="logOut()" class="btn btn-info">
+        Log Out
+      </button>
+    </div>
   </div>
-  
 </nav>

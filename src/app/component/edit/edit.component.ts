@@ -45,7 +45,7 @@ export class EditComponent implements OnInit {
           ]),
         });
       } else {
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       }
     });
   }
@@ -65,7 +65,7 @@ export class EditComponent implements OnInit {
         this.appStore.dispatch(
           setApiStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
         );
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       }
     });
   }

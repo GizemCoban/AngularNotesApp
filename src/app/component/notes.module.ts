@@ -10,10 +10,11 @@ import { NotesEffect } from './store/notes.effect';
 import { noteReducer } from './store/notes.reducer';
 import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
-  declarations: [HomeComponent, AddComponent, EditComponent],
+  declarations: [HomeComponent, AddComponent, EditComponent, LoginComponent],
   imports: [
     CommonModule,
     NotesRoutingModule,

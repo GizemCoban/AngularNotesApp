@@ -1,14 +1,9 @@
 {
   "notes": [
     {
-      "id": 1,
-      "noteInformation": "c",
-      "scale": 0
-    },
-    {
       "id": 2,
       "noteInformation": "Notlar",
-      "scale": "5"
+      "scale": "3"
     },
     {
       "id": 3,
@@ -18,6 +13,11 @@
     {
       "id": 4,
       "noteInformation": "Gizem",
+      "scale": "2"
+    },
+    {
+      "id": 5,
+      "noteInformation": "Notlarım",
       "scale": "4"
     }
   ]
