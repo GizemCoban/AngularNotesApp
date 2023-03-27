@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { map, switchMap } from 'rxjs';
+import { setApiStatus } from 'src/app/shared/app.action';
+import { Appstate } from 'src/app/shared/appstate';
 import { NotesService } from '../notes.service';
 import * as NoteAction from './notes.action';
 
@@ -8,17 +11,39 @@ import * as NoteAction from './notes.action';
 export class NotesEffect {
   constructor(
     private readonly actions$: Actions,
-    private service: NotesService
+    private service: NotesService,
+    private appStore: Store<Appstate>
   ) {}
 
-  loadAllBook$ = createEffect(() =>
+  loadAllNote$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(NoteAction.getNotesApi),
+      ofType(NoteAction.getNotesApi, NoteAction.addNewNoteResponse),
       switchMap((action) =>
         this.service
           .get()
           .pipe(map((noteList) => NoteAction.getNotesApiSuccess({ noteList })))
       )
+    )
+  );
+
+  addNewNote$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NoteAction.addNewNote),
+      switchMap((action) => {
+        this.appStore.dispatch(
+          setApiStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
+        );
+        return this.service.addNewNote(action.payload).pipe(
+          map((data) => {
+            this.appStore.dispatch(
+              setApiStatus({
+                apiStatus: { apiResponseMessage: '', apiStatus: 'success' },
+              })
+            );
+            return NoteAction.addNewNoteResponse({ response: data });
+          })
+        );
+      })
     )
   );
 }

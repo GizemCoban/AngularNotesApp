@@ -15,9 +15,8 @@ export class HomeComponent implements OnInit {
   notes$!: Observable<Notes[]>;
   
   constructor(private store: Store,) {}
-  ngOnInit(): void {
-    
 
+  ngOnInit(): void {
     this.notes$ = this.store.pipe(select(getNoteList));
     this.store.dispatch(getNotesApi());
   }

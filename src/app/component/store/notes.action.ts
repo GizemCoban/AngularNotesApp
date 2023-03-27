@@ -8,3 +8,12 @@ export const getNotesApiSuccess = createAction(
   props<{ noteList: Notes[] }>()
 );
 
+export const addNewNote = createAction(
+  '[Note Api] AddNewNote',
+  props<{ payload: Notes }>()
+);
+
+export const addNewNoteResponse = createAction(
+  '[Note Api] AddNewNoteResponse',
+  props<{ response: Notes }>()
+);

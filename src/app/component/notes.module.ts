@@ -8,9 +8,10 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { NotesEffect } from './store/notes.effect';
 import { noteReducer } from './store/notes.reducer';
+import { AddComponent } from './add/add.component';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, AddComponent],
   imports: [
     CommonModule,
     NotesRoutingModule,

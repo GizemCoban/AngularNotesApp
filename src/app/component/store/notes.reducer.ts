@@ -12,7 +12,7 @@ export const noteReducer = createReducer(
   initialState,
   on(actions.getNotesApi, (state, action) => ({
     ...state,
-    bookList: [],
+    noteList: [],
   })),
   on(actions.getNotesApiSuccess, (state, action) => ({
     ...state,

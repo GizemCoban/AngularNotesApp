@@ -11,4 +11,8 @@ export class NotesService {
   get() {
     return this.http.get<Notes[]>('http://localhost:3000/notes');
   }
+
+  addNewNote(payload: Notes) {
+    return this.http.post<Notes>('http://localhost:3000/notes', payload);
+  }
 }

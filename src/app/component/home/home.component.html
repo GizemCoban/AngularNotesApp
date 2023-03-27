@@ -1,4 +1,4 @@
-<div class="container mt-2" *ngIf="notes$; else isNotNotes">
+<div class="container mt-2" *ngIf="notes$ | async; else isNotNotes">
   <div class="row row-cols-1 row-cols-md-3 g-4" >
     <div class="col" *ngFor="let note of notes$ | async">
       <div class="card">
