@@ -1,14 +1,46 @@
 .input-edit {
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
-  
-  .input-edit:hover {
-    opacity: 1;
-  }
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
 
-  .center {
-    margin: auto;
-    width: 50%;
-    padding: 30px;
-  }
+.input-edit:hover {
+  opacity: 1;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  padding: 30px;
+}
+
+.image {
+  width: 64px;
+  height: 64px;
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.note-card {
+  height: 200px;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.note-card::-webkit-scrollbar {
+  display: none;
+}
+
+.note-group {
+  height: 500px;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.note-group::-webkit-scrollbar {
+  display: none;
+}

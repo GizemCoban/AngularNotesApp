@@ -23,12 +23,13 @@ export class HomeComponent implements OnInit {
   deleteModal: any;
   idToDelete: number = 0;
   searchControl = new FormControl();
+  search: boolean;
 
   public sortBy = ['small to big', 'big to small'];
 
   selectedSort = 'Selected Scale';
 
-  displaySize = 5;
+  displaySize = 10;
 
   constructor(
     private store: Store,
@@ -45,10 +46,17 @@ export class HomeComponent implements OnInit {
     );
 
     this.searchControl.valueChanges.subscribe((value) => {
-      this.notes$ =
-        value != undefined || value != null
-          ? this.store.pipe(select(searchValue(value)))
-          : this.store.pipe(select(getNoteList));
+      if (value != undefined || value != null) {
+        this.notes$ = this.store.pipe(select(searchValue(value)));
+        this.search = true
+      } else {
+        this.store.pipe(select(getNoteList));
+        this.search = false
+      }
+      // this.notes$ =
+      //   value != undefined || value != null
+      //     ? this.store.pipe(select(searchValue(value)))
+      //     : this.store.pipe(select(getNoteList));
     });
 
     this.store.dispatch(getNotesApi());
@@ -90,6 +98,6 @@ export class HomeComponent implements OnInit {
   }
 
   onClickMore() {
-    this.displaySize +=5
+    this.displaySize += 10;
   }
 }

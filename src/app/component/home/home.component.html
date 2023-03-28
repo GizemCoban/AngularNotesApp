@@ -1,72 +1,80 @@
 <div
   class="container mt-2"
-  *ngIf="(notes$ | async)?.length != 0; else isNotNotes"
 >
-  <div class="d-flex my-3">
-    <select [(ngModel)]="selectedSort">
-      <option [value]="">Selected Scale</option>
-      <option *ngFor="let item of sortBy; let i = index" [value]="item">
-        {{ item }}
-      </option>
-    </select>
-    <input
-      type="text"
-      placeholder="Search"
-      class="form-control"
-      [formControl]="searchControl"
-    />
-  </div>
+  <div class="note-group">
+    <div class="d-flex my-3">
+      <select [(ngModel)]="selectedSort">
+        <option [value]="">Selected Scale</option>
+        <option *ngFor="let item of sortBy; let i = index" [value]="item">
+          {{ item }}
+        </option>
+      </select>
+      <input
+        type="text"
+        placeholder="Search"
+        class="form-control"
+        [formControl]="searchControl"
+      />
+    </div>
 
-  <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div
-      class="col"
-      *ngFor="let note of sort((notes$ | async)?.slice(0, displaySize))"
-    >
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ note.noteInformation }}</h5>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Priority: {{ note.scale }}</li>
-        </ul>
-        <div class="card-body">
-          <button
-            class="btn text-white input-edit"
-            style="background-color: #6d12f5; margin-right: 2px"
-          >
-            <a
-              [routerLink]="['/edit', note.id]"
-              class="text-white"
-              style="background-color: #6d12f5; text-decoration: none"
-              >Edit Note</a
+    <div class="row row-cols-1 row-cols-md-3 g-4"  *ngIf="(notes$ | async)?.length != 0; else isNotNotes">
+      <div
+        class="col"
+        *ngFor="let note of sort((notes$ | async)?.slice(0, displaySize))"
+      >
+        <div class="card note-card">
+          <div class="card-header">
+            <div>
+              <img src="{{ note.image }}" class="image" loading="lazy" *ngIf="note.image" />
+              <img src="../../../assets/no-image.jpg" class="image" loading="lazy" *ngIf="!note.image" />
+            </div>
+            <h4 class="list-group-item">{{ note.scale }}</h4>
+          </div>
+
+          <div class="card-body">
+            <h5 class="card-title">{{ note.noteInformation }}</h5>
+          </div>
+
+          <div class="card-body">
+            <button
+              class="btn text-white input-edit"
+              style="background-color: #6d12f5; margin-right: 2px"
             >
-          </button>
-          <button
-            class="btn text-white input-edit"
-            style="background-color: #6d12f5"
-            (click)="openDeleteModal(note.id)"
-          >
-            <a
-              class="text-white"
-              style="background-color: #6d12f5; text-decoration: none"
-              >Delete</a
+              <a
+                [routerLink]="['/edit', note.id]"
+                class="text-white"
+                style="background-color: #6d12f5; text-decoration: none"
+                >Edit Note</a
+              >
+            </button>
+            <button
+              class="btn text-white input-edit"
+              style="background-color: #6d12f5"
+              (click)="openDeleteModal(note.id)"
             >
-          </button>
+              <a
+                class="text-white"
+                style="background-color: #6d12f5; text-decoration: none"
+                >Delete</a
+              >
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<button
-  class="btn text-white"
-  style="background-color: #6d12f5"
-  (click)="onClickMore()"
->
-  <a class="text-white" style="background-color: #6d12f5; text-decoration: none"
-    >View More</a
+  <button
+    class="btn text-white"
+    style="background-color: #6d12f5; margin:10px;"
+    (click)="onClickMore()"
   >
-</button>
+    <a
+      class="text-white"
+      style="background-color: #6d12f5; text-decoration: none"
+      >View More</a
+    >
+  </button>
+</div>
 
 <!-- Modal -->
 <div
@@ -101,5 +109,6 @@
 </div>
 
 <ng-template #isNotNotes>
-  <div class="center">No content has been entered yet</div>
+  <div class="center" *ngIf="!search">No content has been entered yet</div>
+  <div class="center" *ngIf="search">No results were found matching your search.</div>
 </ng-template>

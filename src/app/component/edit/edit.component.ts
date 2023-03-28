@@ -18,6 +18,8 @@ import { selectNoteById } from '../store/notes.selector';
 export class EditComponent implements OnInit {
   noteForm: FormGroup;
   id: number;
+  imageFile: any;
+
   constructor(
     private store: Store,
     private route: ActivatedRoute,
@@ -43,6 +45,7 @@ export class EditComponent implements OnInit {
             Validators.min(0),
             Validators.max(5),
           ]),
+          image: new FormControl(''),
         });
       } else {
         this.router.navigate(['/home']);
@@ -55,6 +58,7 @@ export class EditComponent implements OnInit {
       id: this.id,
       noteInformation: this.noteForm.value.noteInformation,
       scale: this.noteForm.value.scale,
+      image: this.imageFile && this.imageFile.src,
     };
 
     this.store.dispatch(updateNote({ payload: newNotes }));
@@ -68,5 +72,27 @@ export class EditComponent implements OnInit {
         this.router.navigate(['/home']);
       }
     });
+  }
+
+  onFileChanged(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      const max_size = 20971520;
+
+      if (event.target.files[0].size > max_size) {
+        this.toastr.error(
+          '',
+          'Maximum size allowed is ' + max_size / 1000 + 'Mb'
+        );
+        return false;
+      }
+
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (e: any) => {
+        this.imageFile = new Image();
+        this.imageFile.src = e.target.result;
+      };
+    }
+    return true;
   }
 }

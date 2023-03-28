@@ -1,12 +1,22 @@
-<nav class="navbar navbar-light" style="background-color: #6d12f5">
+<nav class="navbar navbar-light" style="background-color: #f8bb02fa">
   <div class="container-fluid">
-    <a class="navbar-brand text-white" routerLink="/home">Note App</a>
+    <a class="navbar-brand" style="color:#6d12f5; padding: 5px; font-weight: bold;" routerLink="/home">Note App</a>
 
     <div *ngIf="isNoteButton | async">
-      <button type="button" routerLink="/add" class="btn btn-info" style="margin-right: 3px;">
+      <button
+        type="button"
+        routerLink="/add"
+        class="btn"
+        style="background-color: #6d12f5; margin-right: 3px; color:white"
+      >
         Note Add
       </button>
-      <button type="button" (click)="logOut()" class="btn btn-info">
+      <button
+        type="button"
+        (click)="logOut()"
+        class="btn"
+        style="background-color: #6d12f5; color:white"
+      >
         Log Out
       </button>
     </div>
