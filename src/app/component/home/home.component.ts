@@ -28,6 +28,8 @@ export class HomeComponent implements OnInit {
 
   selectedSort = 'Selected Scale';
 
+  displaySize = 5;
+
   constructor(
     private store: Store,
     private appStore: Store<Appstate>,
@@ -85,5 +87,9 @@ export class HomeComponent implements OnInit {
       else return notes.reverse();
 
     return [];
+  }
+
+  onClickMore() {
+    this.displaySize +=5
   }
 }
