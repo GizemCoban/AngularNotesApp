@@ -9,7 +9,7 @@ import { selectAppState } from 'src/app/shared/app.selector';
 import { Appstate } from 'src/app/shared/appstate';
 import { Notes } from '../store/notes';
 import { deleteNote, getNotesApi } from '../store/notes.action';
-import { getNoteList } from '../store/notes.selector';
+import { getNoteList, searchValue } from '../store/notes.selector';
 
 declare var window: any;
 
@@ -19,24 +19,36 @@ declare var window: any;
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  notes$!: Observable<Notes[]>;
+  notes$: Observable<Notes[]> = this.store.pipe(select(getNoteList));
   deleteModal: any;
   idToDelete: number = 0;
-  searchControl:string='';
+  searchControl = new FormControl();
+
+  public sortBy = ['small to big', 'big to small'];
+
+  selectedSort = 'Selected Scale';
 
   constructor(
     private store: Store,
     private appStore: Store<Appstate>,
     private router: Router,
     private toastr: ToastrService
-  ) {}
+  ) {
+    this.notes$ = this.store.pipe(select(getNoteList));
+  }
 
   ngOnInit(): void {
     this.deleteModal = new window.bootstrap.Modal(
       document.getElementById('deleteModal')
     );
-   
-    this.notes$ = this.store.pipe(select(getNoteList));
+
+    this.searchControl.valueChanges.subscribe((value) => {
+      this.notes$ =
+        value != undefined || value != null
+          ? this.store.pipe(select(searchValue(value)))
+          : this.store.pipe(select(getNoteList));
+    });
+
     this.store.dispatch(getNotesApi());
   }
 
@@ -52,16 +64,26 @@ export class HomeComponent implements OnInit {
       })
     );
     let apiStatus$ = this.appStore.pipe(select(selectAppState));
+    this.toastr.success('', 'Note Deleted');
     apiStatus$.subscribe((apState) => {
       if (apState.apiStatus == 'success') {
         this.deleteModal.hide();
-        
-        this.toastr.success('', 'Note Deleted');
         this.appStore.dispatch(
           setApiStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
         );
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       }
     });
+  }
+
+  sort(notes?: Notes[]) {
+    if (notes)
+      if (this.selectedSort === 'small to big')
+        return [...notes].sort((a: Notes, b: Notes) => a.scale - b.scale);
+      else if (this.selectedSort === 'big to small')
+        return [...notes].sort((a: Notes, b: Notes) => b.scale - a.scale);
+      else return notes.reverse();
+
+    return [];
   }
 }

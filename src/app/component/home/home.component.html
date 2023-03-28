@@ -2,12 +2,22 @@
   class="container mt-2"
   *ngIf="(notes$ | async)?.length != 0; else isNotNotes"
 >
-  <div class="mb-4">
-    <input type="text" class="form-control" [value]="searchControl" />
+  
+  <div class="d-flex my-3">
+    <select [(ngModel)]="selectedSort">
+      <option [value]="">Selected Scale</option>
+      <option *ngFor="let item of sortBy; let i = index" [value]="item"> {{ item }}</option>
+    </select>
+    <input
+      type="text"
+      placeholder="Search"
+      class="form-control"
+      [formControl]="searchControl"
+    />
   </div>
 
   <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col" *ngFor="let note of (notes$ | async)?.slice()?.reverse()">
+    <div class="col" *ngFor="let note of sort((notes$ | async)?.slice()) ">
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ note.noteInformation }}</h5>
@@ -77,5 +87,5 @@
 </div>
 
 <ng-template #isNotNotes>
-  <div>No content has been entered yet</div>
+  <div class="center">No content has been entered yet</div>
 </ng-template>

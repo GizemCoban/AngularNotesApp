@@ -12,7 +12,7 @@
         "
       >
         <div
-          class="invalid feedback"
+          class="invalid feedback error"
           *ngIf="loginForm.controls['username'].errors['required']"
         >
           Username is required
@@ -21,7 +21,7 @@
     </div>
     <div class="mb-3">
       <label class="form-label">Password</label>
-      <input type="text" class="form-control" formControlName="password" />
+      <input type="password" class="form-control" formControlName="password" />
       <div
         *ngIf="
           loginForm.controls['password'].invalid &&
@@ -30,7 +30,7 @@
         "
       >
         <div
-          class="invalid feedback"
+          class="invalid feedback error"
           *ngIf="loginForm.controls['password'].errors['required']"
         >
           Password is required

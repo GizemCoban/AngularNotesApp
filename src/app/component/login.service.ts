@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class LoginService {
   isLogin: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private toastr: ToastrService) {
     this.isLogin.next(
       localStorage.getItem('isLogin') === 'true' ? true : false
     );
@@ -18,7 +19,10 @@ export class LoginService {
     if (username === 'admin' && password === '12345') {
       this.isLogin.next(true);
       localStorage.setItem('isLogin', 'true');
+      this.toastr.success('', 'Login successful');
       this.router.navigate(['home']);
+    } else {
+      this.toastr.error('', 'Username or password is wrong!');
     }
   }
 

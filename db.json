@@ -1,24 +1,19 @@
 {
   "notes": [
     {
+      "id": 1,
+      "noteInformation": "Bu bir deneme",
+      "scale": "4"
+    },
+    {
       "id": 2,
-      "noteInformation": "Notlar",
-      "scale": "3"
+      "noteInformation": "Yazılım",
+      "scale": 0
     },
     {
       "id": 3,
-      "noteInformation": "Notlarım",
-      "scale": "4"
-    },
-    {
-      "id": 4,
-      "noteInformation": "Gizem",
-      "scale": "2"
-    },
-    {
-      "id": 5,
-      "noteInformation": "Notlarım",
-      "scale": "4"
+      "noteInformation": "Deneme",
+      "scale": "1"
     }
   ]
 }

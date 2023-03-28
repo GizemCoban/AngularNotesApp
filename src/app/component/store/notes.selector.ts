@@ -17,3 +17,9 @@ export const selectNoteById = (noteId: number) =>
     }
     return notebyId[0];
   });
+
+export const searchValue = (filterValue: string) =>
+  createSelector(getNoteList, (notes: Notes[]) => {
+    var item = notes.filter((_) => _.noteInformation.toLocaleLowerCase().includes(filterValue.trim().toLocaleLowerCase()));
+    return item;
+  });

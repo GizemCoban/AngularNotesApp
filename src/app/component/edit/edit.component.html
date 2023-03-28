@@ -16,7 +16,7 @@
         "
       >
         <div
-          class="invalid feedback"
+          class="invalid feedback error"
           *ngIf="noteForm.controls['noteInformation'].errors['required']"
         >
           Note Information is required
@@ -34,7 +34,7 @@
         "
       >
         <div
-          class="invalid feedback"
+          class="invalid feedback error"
           *ngIf="
             noteForm.controls['scale'].errors['min'] ||
             noteForm.controls['scale'].errors['max']

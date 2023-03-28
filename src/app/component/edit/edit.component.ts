@@ -59,9 +59,9 @@ export class EditComponent implements OnInit {
 
     this.store.dispatch(updateNote({ payload: newNotes }));
     let apiStatus$ = this.appStore.pipe(select(selectAppState));
+    this.toastr.success('', 'Note updated.');
     apiStatus$.subscribe((apState) => {
       if (apState.apiStatus == 'success') {
-        this.toastr.success('', 'Note updated.');
         this.appStore.dispatch(
           setApiStatus({ apiStatus: { apiResponseMessage: '', apiStatus: '' } })
         );
