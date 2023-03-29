@@ -48,15 +48,11 @@ export class HomeComponent implements OnInit {
     this.searchControl.valueChanges.subscribe((value) => {
       if (value != undefined || value != null) {
         this.notes$ = this.store.pipe(select(searchValue(value)));
-        this.search = true
+        this.search = true;
       } else {
         this.store.pipe(select(getNoteList));
-        this.search = false
+        this.search = false;
       }
-      // this.notes$ =
-      //   value != undefined || value != null
-      //     ? this.store.pipe(select(searchValue(value)))
-      //     : this.store.pipe(select(getNoteList));
     });
 
     this.store.dispatch(getNotesApi());
@@ -99,5 +95,14 @@ export class HomeComponent implements OnInit {
 
   onClickMore() {
     this.displaySize += 10;
+  }
+
+  onScroll(event: any) {
+    if (
+      event.target.offsetHeight + event.target.scrollTop >=
+      event.target.scrollHeight - 10
+    ) {
+      this.onClickMore();
+    }
   }
 }
