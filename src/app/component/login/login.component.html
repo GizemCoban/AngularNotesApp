@@ -1,49 +1,55 @@
 <div class="container">
-  <legend>Login Form</legend>
-  <form [formGroup]="loginForm">
-    <div class="mb-3">
-      <label class="form-label">Username</label>
-      <input type="text" class="form-control" formControlName="username" />
-      <div
-        *ngIf="
-          loginForm.controls['username'].invalid &&
-          loginForm.controls['username'].errors &&
-          loginForm.controls['username'].touched
-        "
-      >
+  <div class="loginForm">
+    <h3>Login Form</h3>
+    <form [formGroup]="loginForm">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control" formControlName="username" />
         <div
-          class="invalid feedback error"
-          *ngIf="loginForm.controls['username'].errors['required']"
+          *ngIf="
+            loginForm.controls['username'].invalid &&
+            loginForm.controls['username'].errors &&
+            loginForm.controls['username'].touched
+          "
         >
-          Username is required
+          <div
+            class="invalid feedback error"
+            *ngIf="loginForm.controls['username'].errors['required']"
+          >
+            Username is required
+          </div>
         </div>
       </div>
-    </div>
-    <div class="mb-3">
-      <label class="form-label">Password</label>
-      <input type="password" class="form-control" formControlName="password" />
-      <div
-        *ngIf="
-          loginForm.controls['password'].invalid &&
-          loginForm.controls['password'].errors &&
-          loginForm.controls['password'].touched
-        "
-      >
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+        />
         <div
-          class="invalid feedback error"
-          *ngIf="loginForm.controls['password'].errors['required']"
+          *ngIf="
+            loginForm.controls['password'].invalid &&
+            loginForm.controls['password'].errors &&
+            loginForm.controls['password'].touched
+          "
         >
-          Password is required
+          <div
+            class="invalid feedback error"
+            *ngIf="loginForm.controls['password'].errors['required']"
+          >
+            Password is required
+          </div>
         </div>
       </div>
-    </div>
-    <button
-      type="button"
-      class="btn text-white"
-      style="background-color: #6d12f5"
-      (click)="login()"
-    >
-      Login
-    </button>
-  </form>
+      <button
+        type="button"
+        class="btn text-white"
+        style="background-color: #6d12f5"
+        (click)="login()"
+      >
+        Login
+      </button>
+    </form>
+  </div>
 </div>

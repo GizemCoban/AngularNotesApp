@@ -3,7 +3,7 @@
   transition: opacity 0.5s ease;
 }
 
-.input-edit:hover {
+.note-card:hover .input-edit {
   opacity: 1;
 }
 

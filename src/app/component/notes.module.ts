@@ -11,10 +11,11 @@ import { noteReducer } from './store/notes.reducer';
 import { AddComponent } from './add/add.component';
 import { EditComponent } from './edit/edit.component';
 import { LoginComponent } from './login/login.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
-  declarations: [HomeComponent, AddComponent, EditComponent, LoginComponent],
+  declarations: [HomeComponent, AddComponent, EditComponent, LoginComponent, PageNotFoundComponent],
   imports: [
     CommonModule,
     NotesRoutingModule,
