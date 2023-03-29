@@ -43,7 +43,7 @@ ng serve
 Uygulama geliştirme sırasında aşağıdaki paketlerden yararlanılmıştır.
 
 - [Angular](https://angular.io/)
-- [Rx.js](hhttps://rxjs.dev/)
+- [Rx.js](https://rxjs.dev/)
 - [Ngrx ](https://ngrx.io/)
 - [Json Server](https://www.npmjs.com/package/json-server)
 - [Bootsrapt](https://getbootstrap.com/)

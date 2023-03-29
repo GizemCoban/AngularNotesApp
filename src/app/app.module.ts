@@ -13,6 +13,7 @@ import { appReducer } from './shared/app.reducer';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from 'src/environment/environment';
 
 @NgModule({
   declarations: [AppComponent, FooterComponent, HeaderComponent],
@@ -24,7 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
     StoreModule.forRoot({ myappstate: appReducer }),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     ToastrModule.forRoot(),
     
   ],
